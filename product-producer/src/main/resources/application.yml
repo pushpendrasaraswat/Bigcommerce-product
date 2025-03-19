@@ -1,0 +1,13 @@
+server:
+  port:8080
+
+spring:
+  application:
+    name: product-producer
+  kafka:
+    template:
+      topic-name: bigcommerce_product
+    producer:
+      bootstrap-servers: localhost:19092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer:  org.springframework.kafka.support.serializer.JsonSerializer
