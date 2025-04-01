@@ -7,6 +7,7 @@
 you need to use following url to push data into kafka.
 
 curl command 
+
 curl --request POST \
   --url http://localhost:8080/product \
   --header 'content-type: application/json' \
