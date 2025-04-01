@@ -16,12 +16,13 @@ spring:
         spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
         spring.json.value.default.type: com.bigcommerce.product_consumer.event.ProductCreatedEvent
 
+
 bigcommerce:
   connection:
-    api_url: ${API_PATH}
-    access_token: ${ACCESS_TOKEN}
-    client_name: ${CLIENT_NAME}
-    client_id: ${CLIENT_ID}
-    client_secret: ${CLIENT_SECRET}
-    graphql_path: ${GRAPHQL_PATH}
+    api_url: ${API_PATH:}
+    access_token: ${ACCESS_TOKEN:}
+    client_name: ${CLIENT_NAME:}
+    client_id: ${CLIENT_ID:}
+    client_secret: ${CLIENT_SECRET:}
+    graphql_path: ${GRAPHQL_PATH:}
     name: Bigcommerce-connection
