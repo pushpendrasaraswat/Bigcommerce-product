@@ -32,10 +32,7 @@ curl --request GET \
    
 2. get product data from bigcommerce using Graphql
 curl --request GET \
-  --url https://api.bigcommerce.com/stores/jinm0u387s/v3/catalog/products/122 \
-  --header 'content-type: application/json' \
-  --header 'x-auth-token: bvz3t7797no0ws4d0fdqj9tkmhaady6' \
-  --data '{"query":"query productById($productId: Int!) {\n  site {\n    product(entityId: $productId) {\n      id\n      entityId\n      name\n      plainTextDescription\n      defaultImage {\n        ...ImageFields\n      }\n      images {\n        edges {\n          node {\n            ...ImageFields\n          }\n        }\n      }\n      customFields {\n        edges {\n          node {\n            ...CustomField\n          }\n        }\n      }\n      reviewSummary {\n        summationOfRatings\n        numberOfReviews\n      }\n      prices {\n        price {\n          ...MoneyFields\n        }\n        priceRange {\n          min {\n            ...MoneyFields\n          }\n          max {\n            ...MoneyFields\n          }\n        }\n        salePrice {\n          ...MoneyFields\n        }\n        retailPrice {\n          ...MoneyFields\n        }\n        saved {\n          ...MoneyFields\n        }\n        bulkPricing {\n          minimumQuantity\n          maximumQuantity\n          ... on BulkPricingFixedPriceDiscount {\n            price\n          }\n          ... on BulkPricingPercentageDiscount {\n            percentOff\n          }\n          ... on BulkPricingRelativePriceDiscount {\n            priceAdjustment\n          }\n        }\n      }\n      brand {\n        name\n      }\n    }\n  }\n}\n\nfragment ImageFields on Image {\n  url320wide: url(width: 320)\n  url640wide: url(width: 640)\n  url960wide: url(width: 960)\n  url1280wide: url(width: 1280)\n}\n\nfragment MoneyFields on Money {\n  value\n  currencyCode\n}\n\nfragment CustomField on CustomField {\n  name\n  value\n}"}'
+  --url http://localhost:8082/product/122/graphql
 
 ## Set up environment variable 
 check application.yml file in both the projects and setup environment variables accordingly.
