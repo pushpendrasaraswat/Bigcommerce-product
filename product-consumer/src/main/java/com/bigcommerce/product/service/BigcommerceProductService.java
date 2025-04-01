@@ -57,7 +57,7 @@ public class BigcommerceProductService {
 
         return graphQlClient.document(productQuery)
             .variable("productId", Integer.valueOf(productId))
-            .retrieve("site.product")
+                .retrieve("site.product")
             .toEntity(ProductResponse.Product.class) // Get full JSON response
             .block();
     }

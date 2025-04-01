@@ -10,6 +10,8 @@ import com.bigcommerce.product.constants.BigCommerceConstant;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
@@ -25,7 +27,10 @@ public class AppConfig {
 
     @Bean
     public WebClient webClient() {
-        return WebClient.builder().baseUrl(apiPath).defaultHeader(BigCommerceConstant.TOKEN_HEADER, accessToken).build();
+        return WebClient.builder().baseUrl(apiPath).defaultHeader(BigCommerceConstant.TOKEN_HEADER, accessToken)
+                .defaultHeader("Content-Type","application/json")
+                .defaultHeader("Accept","application/json")
+        .build();
     }
 
 
@@ -36,9 +41,27 @@ public class AppConfig {
             .baseUrl(graphQlPath)
             .defaultHeader(
                 "Authorization",
-                "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJjaWQiOlsxXSwiY29ycyI6WyJodHRwczovL2RldmVsb3Blci5iaWdjb21tZXJjZS5jb20iXSwiZWF0IjoxNzQzNjYwODcxLCJpYXQiOjE3NDM0ODgwNzEsImlzcyI6IkJDIiwic2lkIjoxMDAzMzM5MDM1LCJzdWIiOiJCQyIsInN1Yl90eXBlIjowLCJ0b2tlbl90eXBlIjoxfQ.TDdr3RrBm4zgeu13ybeoj63qXmIir0kAVH699qIVwtutOkKLKzyOyH-kQztct_ADr8m87RlfNcmeudtqQjpS3Q")
+                "Bearer"+ getWebToken())
             .build();
 
         return HttpGraphQlClient.builder(webClient).build();
+    }
+
+    private String getWebToken() {
+        TokenData tokenData=TokenData.builder().allowedCorsOrigins(List.of("http://localhost:8080"))
+                        .channel_id(1).expires_at(1885635176).build();
+
+         TokenResponse response=webClient()
+                 .post().uri("storefront/api-token")
+                .bodyValue(tokenData)
+                .retrieve()
+                .bodyToMono(TokenResponse.class)
+                .block();
+
+         if(null!=response && null != response.getData()){
+             return response.getData().getToken();
+         }else {
+             return null;
+         }
     }
 }
