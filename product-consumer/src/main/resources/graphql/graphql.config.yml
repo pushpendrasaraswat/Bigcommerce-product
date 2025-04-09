@@ -1,0 +1,11 @@
+schema:
+  - https://psepamlearning.mybigcommerce.com/graphql
+documents:
+  - src/main/resources/graphql/**/*.graphql
+extensions:
+  endpoints:
+    default:
+      url: https://psepamlearning.mybigcommerce.com/graphql
+      headers:
+        Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJjaWQiOlsxXSwiY29ycyI6WyJodHRwOi8vbG9jYWxob3N0OjgwODAiXSwiZWF0IjoxODg1NjM1MTc2LCJpYXQiOjE3NDM1MDI3NTUsImlzcyI6IkJDIiwic2lkIjoxMDAzMzM5MDM1LCJzdWIiOiJxZW0yMmxhbGV6encxMXliYmVxNHIxa296MDJ4YndmIiwic3ViX3R5cGUiOjIsInRva2VuX3R5cGUiOjF9.qrFvEfSJOw0BxRzu0yBVJOU37pMeEAUz0iJ9UCo7DBqYtadu3gN98JAvrAFboGXt-xOQiMODUpnJLs_Ihk-sAA"
+      introspect: true

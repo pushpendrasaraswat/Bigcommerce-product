@@ -1,0 +1,44 @@
+query metafields {
+    site {
+        products(first: 3) {
+            edges {
+                cursor
+                node {
+                    metafields(
+                        namespace: "my-namespace"
+                        keys: ["my-key", "my-other-key"]
+                        first: 2
+                    ) {
+                        edges {
+                            node {
+                                key
+                                id
+                                value
+                            }
+                        }
+                    }
+                    variants(first: 5) {
+                        edges {
+                            node {
+                                sku
+                                metafields(
+                                    namespace: "my-namespace"
+                                    keys: ["my-key", "my-other-key"]
+                                    first: 2
+                                ) {
+                                    edges {
+                                        node {
+                                            key
+                                            id
+                                            value
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
