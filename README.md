@@ -35,5 +35,32 @@ curl --request GET \
 curl --request GET \
   --url http://localhost:8082/product/122/graphql
 
+3. Create cart for anonymous user
+
+curl --request POST \
+  --url http://localhost:8082/cart \
+  --header 'content-type: application/json' \
+  --data '{
+  "customer_id": 0,
+  "line_items": [
+    {
+      "quantity": 2,
+      "product_id": {{product_id}},
+      "list_price": 5,
+      "name": "calendar"
+    }
+  ],
+  "channel_id": 1,
+  "currency": {
+    "code": "USD"
+  },
+  "locale": "en-US"
+}'
+
+4. Get Cart
+
+   curl --request GET \
+  --url http://localhost:8082/cart/e166c4ea-c330-439b-b1c4-d9cc8fbb7ccb
+
 ## Set up environment variable 
 check application.yml file in both the projects and setup environment variables accordingly.
